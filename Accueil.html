@@ -5,29 +5,120 @@
     <title>Accueil</title>
 </head>
 <body>
+
+    <script>
+        function GetNbrMemeJour(j_, m_, a_){
+            var RefMois;
+            var D_Date = new Date();
+            var D_Jour = D_Date.getDay();
+            var D_Mois = D_Date.getMonth();
+            var D_Annee = D_Date.getFullYear();
+            var NbrJour = 0;
+            //-- Init des Valeurs
+            if( j_)
+             D_Date.setDate(1); // on met la date au 1st
+            if( m_!=null)
+            D_Date.setMonth(m_); // on place le mois
+            if( a_!=null)
+            D_Date.setYear(a_); // on place l'année
+            RefMois = D_Date.getMonth(); // le mois de réfèrence
+            //-- On demande à JavaScript de faire le Boulot --//
+            for( i=1; i<32; i++){ // Nbr Jour Max 31
+            D_Date.setDate(i);
+            D_Mois = D_Date.getMonth(); // on récupère le mois
+            D_NumJour = D_Date.getDay(); // la position du jour
+            if( RefMois != D_Mois){ // On change de Mois
+                break;
+            }
+            if( D_NumJour == j_)
+            NbrJour++;
+            }
+            return( NbrJour);
+        }
+
+        function GetNbrJour(){
+            const today = new Date(Date.now());
+            const year = today.getFullYear();
+            var nbJourTravaille = 0;
+
+            if (document.getElementById("Lundi").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(1, j, year-1);
+                }
+            }
+
+            if (document.getElementById("Mardi").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(2, j, year-1);
+                }
+            }
+
+            if (document.getElementById("Mercredi").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(3, j, year-1);
+                }
+            }
+
+            if (document.getElementById("Jeudi").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(4, j, year-1);
+                }
+            }
+
+            if (document.getElementById("Vendredi").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(5, j, year-1);
+                }
+            }
+
+            if (document.getElementById("Samedi").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(6, j, year-1);
+                }
+            }
+
+            if (document.getElementById("Dimanche").checked == true)
+            {
+                for(j=0; j<12; j++){
+                    nbJourTravaille = nbJourTravaille + GetNbrMemeJour(0, j, year-1);
+                }
+            }
+
+            alert(nbJourTravaille);
+        }
+    </script>
+
     <h1 style="text-align: center;">Calcul des frais kilométriques</h1>
     <p>Veuillez sélectionner les jours où vous travaillez :</p>
     <div>
-        <input type="checkbox">
+        <input type="checkbox" id="Lundi">
         <label>Lundi</label>
         <br>
-        <input type="checkbox">
+        <input type="checkbox" id="Mardi">
         <label>Mardi</label>
         <br>
-        <input type="checkbox">
+        <input type="checkbox" id="Mercredi">
         <label>Mercredi</label>
         <br>
-        <input type="checkbox">
+        <input type="checkbox" id="Jeudi">
         <label>Jeudi</label>
         <br>
-        <input type="checkbox">
+        <input type="checkbox" id="Vendredi">
         <label>Vendredi</label>
         <br>
-        <input type="checkbox">
+        <input type="checkbox" id="Samedi">
         <label>Samedi</label>
         <br>
-        <input type="checkbox">
+        <input type="checkbox" id="Dimanche">
         <label>Dimanche</label>
     </div>
+    <br>
+    <button type="button" onclick="GetNbrJour();">Calc nb jours</button>
 </body>
 </html>
